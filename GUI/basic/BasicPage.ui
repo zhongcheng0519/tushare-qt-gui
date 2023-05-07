@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1232</width>
-    <height>659</height>
+    <width>1643</width>
+    <height>822</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,6 +59,41 @@
         <widget class="QDateEdit" name="dateEditTo"/>
        </item>
        <item>
+        <widget class="QPushButton" name="pushButtonLastMonth">
+         <property name="text">
+          <string>最近一个月</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonLastThreeMonths">
+         <property name="text">
+          <string>最近三个月</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonLastSixMonths">
+         <property name="text">
+          <string>最近半年</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonLastYear">
+         <property name="text">
+          <string>最近一年</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonLastTwoYears">
+         <property name="text">
+          <string>最近两年</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -77,7 +112,14 @@
       <widget class="QGraphicsView" name="graphicsView"/>
      </item>
      <item>
-      <widget class="QTextEdit" name="textEdit"/>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -87,6 +129,13 @@
       <widget class="QPushButton" name="pushButtonPECurve">
        <property name="text">
         <string>PE curve</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonTurnoverRate">
+       <property name="text">
+        <string>Turnover Rate</string>
        </property>
       </widget>
      </item>

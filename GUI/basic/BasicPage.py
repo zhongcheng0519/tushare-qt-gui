@@ -17,7 +17,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(1232, 659)
+        Form.resize(1643, 822)
         self.horizontalLayout_2 = QHBoxLayout(Form)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.treeWidget = QTreeWidget(Form)
@@ -54,6 +54,31 @@ class Ui_Form(object):
 
         self.horizontalLayout.addWidget(self.dateEditTo)
 
+        self.pushButtonLastMonth = QPushButton(Form)
+        self.pushButtonLastMonth.setObjectName(u"pushButtonLastMonth")
+
+        self.horizontalLayout.addWidget(self.pushButtonLastMonth)
+
+        self.pushButtonLastThreeMonths = QPushButton(Form)
+        self.pushButtonLastThreeMonths.setObjectName(u"pushButtonLastThreeMonths")
+
+        self.horizontalLayout.addWidget(self.pushButtonLastThreeMonths)
+
+        self.pushButtonLastSixMonths = QPushButton(Form)
+        self.pushButtonLastSixMonths.setObjectName(u"pushButtonLastSixMonths")
+
+        self.horizontalLayout.addWidget(self.pushButtonLastSixMonths)
+
+        self.pushButtonLastYear = QPushButton(Form)
+        self.pushButtonLastYear.setObjectName(u"pushButtonLastYear")
+
+        self.horizontalLayout.addWidget(self.pushButtonLastYear)
+
+        self.pushButtonLastTwoYears = QPushButton(Form)
+        self.pushButtonLastTwoYears.setObjectName(u"pushButtonLastTwoYears")
+
+        self.horizontalLayout.addWidget(self.pushButtonLastTwoYears)
+
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
@@ -68,6 +93,11 @@ class Ui_Form(object):
 
         self.textEdit = QTextEdit(Form)
         self.textEdit.setObjectName(u"textEdit")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.textEdit.sizePolicy().hasHeightForWidth())
+        self.textEdit.setSizePolicy(sizePolicy1)
 
         self.verticalLayout.addWidget(self.textEdit)
 
@@ -80,6 +110,11 @@ class Ui_Form(object):
         self.pushButtonPECurve.setObjectName(u"pushButtonPECurve")
 
         self.verticalLayout_2.addWidget(self.pushButtonPECurve)
+
+        self.pushButtonTurnoverRate = QPushButton(Form)
+        self.pushButtonTurnoverRate.setObjectName(u"pushButtonTurnoverRate")
+
+        self.verticalLayout_2.addWidget(self.pushButtonTurnoverRate)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -101,6 +136,12 @@ class Ui_Form(object):
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("Form", u"\u540d\u79f0", None));
         self.label.setText(QCoreApplication.translate("Form", u"from:", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"to:", None))
+        self.pushButtonLastMonth.setText(QCoreApplication.translate("Form", u"\u6700\u8fd1\u4e00\u4e2a\u6708", None))
+        self.pushButtonLastThreeMonths.setText(QCoreApplication.translate("Form", u"\u6700\u8fd1\u4e09\u4e2a\u6708", None))
+        self.pushButtonLastSixMonths.setText(QCoreApplication.translate("Form", u"\u6700\u8fd1\u534a\u5e74", None))
+        self.pushButtonLastYear.setText(QCoreApplication.translate("Form", u"\u6700\u8fd1\u4e00\u5e74", None))
+        self.pushButtonLastTwoYears.setText(QCoreApplication.translate("Form", u"\u6700\u8fd1\u4e24\u5e74", None))
         self.pushButtonPECurve.setText(QCoreApplication.translate("Form", u"PE curve", None))
+        self.pushButtonTurnoverRate.setText(QCoreApplication.translate("Form", u"Turnover Rate", None))
     # retranslateUi
 

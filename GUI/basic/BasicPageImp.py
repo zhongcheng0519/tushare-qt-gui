@@ -14,15 +14,22 @@ class BasicPageImp(QFrame):
         super(BasicPageImp, self).__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        self.ui.pushButtonPECurve.clicked.connect(self.onPushButtonPECurveClicked)
         self.ui.treeWidget.itemClicked.connect(self.onTreeWidgetItemClicked)
         self.tushare = TuShare()
-        # self.refresh()
         self.current_stock_code = None
         # set end date as today
         self.ui.dateEditTo.setDate(QDate().currentDate())
         # set default from date as 1 year ago
         self.ui.dateEditFrom.setDate(QDate().currentDate().addYears(-1))
+        # ================= date selection ==========================
+        self.ui.pushButtonLastMonth.clicked.connect(self.onPushButtonLastMonthClicked)
+        self.ui.pushButtonLastThreeMonths.clicked.connect(self.onPushButtonLastThreeMonthsClicked)
+        self.ui.pushButtonLastYear.clicked.connect(self.onPushButtonLastYearClicked)
+        self.ui.pushButtonLastYear.clicked.connect(self.onPushButtonLastYearClicked)
+        self.ui.pushButtonLastTwoYears.clicked.connect(self.onPushButtonLastTwoYearsClicked)
+        # ==================  Command Buttons ===============================
+        self.ui.pushButtonPECurve.clicked.connect(self.onPushButtonPECurveClicked)
+        self.ui.pushButtonTurnoverRate.clicked.connect(self.onPushButtonTurnoverRateClicked)
 
     def refresh(self):
         print("refresh")
@@ -31,6 +38,31 @@ class BasicPageImp(QFrame):
     def onTreeWidgetItemClicked(self, item: QTreeWidgetItem, column: int):
         print("onTreeWidgetItemClicked")
         self.current_stock_code = item.text(1)
+
+    def onPushButtonLastMonthClicked(self):
+        print("onPushButtonLastMonthClicked")
+        self.ui.dateEditFrom.setDate(QDate().currentDate().addMonths(-1))
+        self.ui.dateEditTo.setDate(QDate().currentDate())
+
+    def onPushButtonLastThreeMonthsClicked(self):
+        print("onPushButtonLastThreeMonthsClicked")
+        self.ui.dateEditFrom.setDate(QDate().currentDate().addMonths(-3))
+        self.ui.dateEditTo.setDate(QDate().currentDate())
+
+    def onPushButtonSixMonthsClicked(self):
+        print("onPushButtonSixMonthsClicked")
+        self.ui.dateEditFrom.setDate(QDate().currentDate().addMonths(-6))
+        self.ui.dateEditTo.setDate(QDate().currentDate())
+
+    def onPushButtonLastYearClicked(self):
+        print("onPushButtonLastYearClicked")
+        self.ui.dateEditFrom.setDate(QDate().currentDate().addYears(-1))
+        self.ui.dateEditTo.setDate(QDate().currentDate())
+
+    def onPushButtonLastTwoYearsClicked(self):
+        print("onPushButtonLastTwoYearsClicked")
+        self.ui.dateEditFrom.setDate(QDate().currentDate().addYears(-2))
+        self.ui.dateEditTo.setDate(QDate().currentDate())
 
     def load_my_stock(self):
         print("load_my_stock")
@@ -53,15 +85,37 @@ class BasicPageImp(QFrame):
     def show_pe_curve(self, df: pd.DataFrame, new_window=False):
         # depend on self.checked
         if new_window:
-            figure = plt.figure()
+            figure = plt.figure(figsize=(10, 4))
         else:
             if self.ui.graphicsView.scene() is not None:
                 self.ui.graphicsView.scene().clear()
-            figure = Figure()
+            figure = Figure(figsize=(10, 4))
         axes = figure.gca()
         axes.plot(df['trade_date'], df['pe_ttm'], label='pe_ttm')
         axes.legend()
         axes.set_title(f"{self.current_stock_code} PE Curve")
+        axes.grid(True)
+
+        if new_window:
+            plt.show()
+        else:
+            canvas = FigureCanvas(figure)
+            scene = QGraphicsScene()
+            self.ui.graphicsView.setScene(scene)
+            scene.addWidget(canvas)
+
+    def show_turnover_rate_curve(self, df: pd.DataFrame, new_window=False):
+        # depend on self.checked
+        if new_window:
+            figure = plt.figure(figsize=(10, 4))
+        else:
+            if self.ui.graphicsView.scene() is not None:
+                self.ui.graphicsView.scene().clear()
+            figure = Figure(figsize=(10, 4))
+        axes = figure.gca()
+        axes.plot(df['trade_date'], df['turnover_rate_f'], label='turnover_rate')
+        axes.legend()
+        axes.set_title(f"{self.current_stock_code} Turnover Rate Curve")
         axes.grid(True)
 
         if new_window:
@@ -84,3 +138,16 @@ class BasicPageImp(QFrame):
 
         # 绘制市盈率曲线到graphicsView
         self.show_pe_curve(df)
+
+    def onPushButtonTurnoverRateClicked(self):
+        print("onPushButtonTurnoverRateClicked")
+        code = self.current_stock_code
+        if code is None:
+            QMessageBox.warning(self, "警告", "请选择股票")
+            return
+        start = self.ui.dateEditFrom.date().toString("yyyyMMdd")
+        end = self.ui.dateEditTo.date().toString("yyyyMMdd")
+        df = self.tushare.get_turnover_rate(code, start, end)
+
+        # 绘制市盈率曲线到graphicsView
+        self.show_turnover_rate_curve(df)
