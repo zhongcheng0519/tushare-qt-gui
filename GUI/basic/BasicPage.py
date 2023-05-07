@@ -111,6 +111,11 @@ class Ui_Form(object):
 
         self.verticalLayout_2.addWidget(self.pushButtonPECurve)
 
+        self.pushButtonPBCurve = QPushButton(Form)
+        self.pushButtonPBCurve.setObjectName(u"pushButtonPBCurve")
+
+        self.verticalLayout_2.addWidget(self.pushButtonPBCurve)
+
         self.pushButtonTurnoverRate = QPushButton(Form)
         self.pushButtonTurnoverRate.setObjectName(u"pushButtonTurnoverRate")
 
@@ -142,6 +147,7 @@ class Ui_Form(object):
         self.pushButtonLastYear.setText(QCoreApplication.translate("Form", u"\u6700\u8fd1\u4e00\u5e74", None))
         self.pushButtonLastTwoYears.setText(QCoreApplication.translate("Form", u"\u6700\u8fd1\u4e24\u5e74", None))
         self.pushButtonPECurve.setText(QCoreApplication.translate("Form", u"PE curve", None))
+        self.pushButtonPBCurve.setText(QCoreApplication.translate("Form", u"PB curve", None))
         self.pushButtonTurnoverRate.setText(QCoreApplication.translate("Form", u"Turnover Rate", None))
     # retranslateUi
 

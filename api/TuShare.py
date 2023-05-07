@@ -21,8 +21,16 @@ class TuShare:
         df['trade_date'] = pd.to_datetime(df['trade_date'])
         return df
 
+    def get_pb_curve(self, code: str, start: str, end: str) -> pd.DataFrame:
+        df = self.pro.daily_basic(ts_code=code, start_date=start, end_date=end, fields='trade_date,pb')
+        # 转换日期格式
+        df['trade_date'] = pd.to_datetime(df['trade_date'])
+        return df
+
     def get_turnover_rate(self, code: str, start: str, end: str) -> pd.DataFrame:
         df = self.pro.daily_basic(ts_code=code, start_date=start, end_date=end, fields='trade_date,turnover_rate_f')
         # 转换日期格式
         df['trade_date'] = pd.to_datetime(df['trade_date'])
         return df
+
+

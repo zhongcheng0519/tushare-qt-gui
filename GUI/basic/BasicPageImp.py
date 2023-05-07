@@ -29,6 +29,7 @@ class BasicPageImp(QFrame):
         self.ui.pushButtonLastTwoYears.clicked.connect(self.onPushButtonLastTwoYearsClicked)
         # ==================  Command Buttons ===============================
         self.ui.pushButtonPECurve.clicked.connect(self.onPushButtonPECurveClicked)
+        self.ui.pushButtonPBCurve.clicked.connect(self.onPushButtonPBCurveClicked)
         self.ui.pushButtonTurnoverRate.clicked.connect(self.onPushButtonTurnoverRateClicked)
 
     def refresh(self):
@@ -104,6 +105,28 @@ class BasicPageImp(QFrame):
             self.ui.graphicsView.setScene(scene)
             scene.addWidget(canvas)
 
+    def show_pb_curve(self, df: pd.DataFrame, new_window=False):
+        # depend on self.checked
+        if new_window:
+            figure = plt.figure(figsize=(10, 4))
+        else:
+            if self.ui.graphicsView.scene() is not None:
+                self.ui.graphicsView.scene().clear()
+            figure = Figure(figsize=(10, 4))
+        axes = figure.gca()
+        axes.plot(df['trade_date'], df['pb'], label='pb')
+        axes.legend()
+        axes.set_title(f"{self.current_stock_code} PB Curve")
+        axes.grid(True)
+
+        if new_window:
+            plt.show()
+        else:
+            canvas = FigureCanvas(figure)
+            scene = QGraphicsScene()
+            self.ui.graphicsView.setScene(scene)
+            scene.addWidget(canvas)
+
     def show_turnover_rate_curve(self, df: pd.DataFrame, new_window=False):
         # depend on self.checked
         if new_window:
@@ -138,6 +161,19 @@ class BasicPageImp(QFrame):
 
         # 绘制市盈率曲线到graphicsView
         self.show_pe_curve(df)
+
+    def onPushButtonPBCurveClicked(self):
+        print("onPushButtonPBCurveClicked")
+        code = self.current_stock_code
+        if code is None:
+            QMessageBox.warning(self, "警告", "请选择股票")
+            return
+        start = self.ui.dateEditFrom.date().toString("yyyyMMdd")
+        end = self.ui.dateEditTo.date().toString("yyyyMMdd")
+        df = self.tushare.get_pb_curve(code, start, end)
+
+        # 绘制市盈率曲线到graphicsView
+        self.show_pb_curve(df)
 
     def onPushButtonTurnoverRateClicked(self):
         print("onPushButtonTurnoverRateClicked")

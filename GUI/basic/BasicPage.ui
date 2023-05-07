@@ -133,6 +133,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="pushButtonPBCurve">
+       <property name="text">
+        <string>PB curve</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="pushButtonTurnoverRate">
        <property name="text">
         <string>Turnover Rate</string>
