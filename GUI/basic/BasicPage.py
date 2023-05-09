@@ -121,6 +121,11 @@ class Ui_Form(object):
 
         self.verticalLayout_2.addWidget(self.pushButtonTurnoverRate)
 
+        self.pushButtonDividend = QPushButton(Form)
+        self.pushButtonDividend.setObjectName(u"pushButtonDividend")
+
+        self.verticalLayout_2.addWidget(self.pushButtonDividend)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_2.addItem(self.verticalSpacer)
@@ -149,5 +154,6 @@ class Ui_Form(object):
         self.pushButtonPECurve.setText(QCoreApplication.translate("Form", u"PE curve", None))
         self.pushButtonPBCurve.setText(QCoreApplication.translate("Form", u"PB curve", None))
         self.pushButtonTurnoverRate.setText(QCoreApplication.translate("Form", u"Turnover Rate", None))
+        self.pushButtonDividend.setText(QCoreApplication.translate("Form", u"dividend", None))
     # retranslateUi
 

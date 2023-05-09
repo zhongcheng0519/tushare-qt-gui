@@ -31,6 +31,7 @@ class BasicPageImp(QFrame):
         self.ui.pushButtonPECurve.clicked.connect(self.onPushButtonPECurveClicked)
         self.ui.pushButtonPBCurve.clicked.connect(self.onPushButtonPBCurveClicked)
         self.ui.pushButtonTurnoverRate.clicked.connect(self.onPushButtonTurnoverRateClicked)
+        self.ui.pushButtonDividend.clicked.connect(self.onPushButtonDividendClicked)
 
     def refresh(self):
         print("refresh")
@@ -187,3 +188,13 @@ class BasicPageImp(QFrame):
 
         # 绘制市盈率曲线到graphicsView
         self.show_turnover_rate_curve(df)
+
+    def onPushButtonDividendClicked(self):
+        print("onPushButtonDividendClicked")
+        code = self.current_stock_code
+        if code is None:
+            QMessageBox.warning(self, "警告", "请选择股票")
+            return
+        df = self.tushare.get_dividend(code)
+        # df用Markdown格式输出
+        self.ui.textEdit.setText(df.to_markdown())

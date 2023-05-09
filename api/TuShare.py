@@ -33,4 +33,7 @@ class TuShare:
         df['trade_date'] = pd.to_datetime(df['trade_date'])
         return df
 
+    def get_dividend(self, code: str) -> pd.DataFrame:
+        df = self.pro.dividend(ts_code=code, fields='ts_code,div_proc,stk_div,cash_div_tax,record_date,ex_date')
+        return df
 
