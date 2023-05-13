@@ -154,6 +154,27 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="pushButtonIncomeSheet">
+       <property name="text">
+        <string>income sheet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonBalanceSheet">
+       <property name="text">
+        <string>balance sheet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonCashflowSheet">
+       <property name="text">
+        <string>cashflow sheet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>

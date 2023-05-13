@@ -32,6 +32,9 @@ class BasicPageImp(QFrame):
         self.ui.pushButtonPBCurve.clicked.connect(self.onPushButtonPBCurveClicked)
         self.ui.pushButtonTurnoverRate.clicked.connect(self.onPushButtonTurnoverRateClicked)
         self.ui.pushButtonDividend.clicked.connect(self.onPushButtonDividendClicked)
+        self.ui.pushButtonIncomeSheet.clicked.connect(self.onPushButtonIncomeSheetClicked)
+        self.ui.pushButtonBalanceSheet.clicked.connect(self.onPushButtonBalanceSheetClicked)
+        self.ui.pushButtonCashflowSheet.clicked.connect(self.onPushButtonCashflowSheetClicked)
 
     def refresh(self):
         print("refresh")
@@ -196,5 +199,41 @@ class BasicPageImp(QFrame):
             QMessageBox.warning(self, "警告", "请选择股票")
             return
         df = self.tushare.get_dividend(code)
+        # df用Markdown格式输出
+        self.ui.textEdit.setText(df.to_markdown())
+
+    def onPushButtonIncomeSheetClicked(self):
+        print("onPushButtonIncomeSheetClicked")
+        code = self.current_stock_code
+        if code is None:
+            QMessageBox.warning(self, "警告", "请选择股票")
+            return
+        start_date = self.ui.dateEditFrom.date().toString("yyyyMMdd")
+        end_date = self.ui.dateEditTo.date().toString("yyyyMMdd")
+        df = self.tushare.get_income_sheet(code, start_date, end_date)
+        # df用Markdown格式输出
+        self.ui.textEdit.setText(df.to_markdown())
+
+    def onPushButtonBalanceSheetClicked(self):
+        print("onPushButtonBalanceSheetClicked")
+        code = self.current_stock_code
+        if code is None:
+            QMessageBox.warning(self, "警告", "请选择股票")
+            return
+        start_date = self.ui.dateEditFrom.date().toString("yyyyMMdd")
+        end_date = self.ui.dateEditTo.date().toString("yyyyMMdd")
+        df = self.tushare.get_balance_sheet(code, start_date, end_date)
+        # df用Markdown格式输出
+        self.ui.textEdit.setText(df.to_markdown())
+
+    def onPushButtonCashflowSheetClicked(self):
+        print("onPushButtonCashflowSheetClicked")
+        code = self.current_stock_code
+        if code is None:
+            QMessageBox.warning(self, "警告", "请选择股票")
+            return
+        start_date = self.ui.dateEditFrom.date().toString("yyyyMMdd")
+        end_date = self.ui.dateEditTo.date().toString("yyyyMMdd")
+        df = self.tushare.get_cashflow_sheet(code, start_date, end_date)
         # df用Markdown格式输出
         self.ui.textEdit.setText(df.to_markdown())

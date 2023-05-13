@@ -37,3 +37,14 @@ class TuShare:
         df = self.pro.dividend(ts_code=code, fields='ts_code,div_proc,stk_div,cash_div_tax,record_date,ex_date')
         return df
 
+    def get_income_sheet(self, code: str, start: str, end: str) -> pd.DataFrame:
+        df = self.pro.income(ts_code=code, start_date=start, end_date=end, fields='ts_code,ann_date,f_ann_date,end_date,report_type,comp_type,basic_eps,total_profit,n_income')
+        return df
+
+    def get_balance_sheet(self, code: str, start: str, end: str) -> pd.DataFrame:
+        df = self.pro.balancesheet(ts_code=code, start_date=start, end_date=end, fields='ts_code,ann_date,f_ann_date,end_date,report_type,comp_type,cap_rese,accounts_receiv_bill,accounts_pay')
+        return df
+
+    def get_cashflow_sheet(self, code: str, start: str, end: str) -> pd.DataFrame:
+        df = self.pro.cashflow(ts_code=code, start_date=start, end_date=end, fields='ts_code,end_date,net_profit,c_paid_for_taxes')
+        return df

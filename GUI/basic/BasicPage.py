@@ -126,6 +126,21 @@ class Ui_Form(object):
 
         self.verticalLayout_2.addWidget(self.pushButtonDividend)
 
+        self.pushButtonIncomeSheet = QPushButton(Form)
+        self.pushButtonIncomeSheet.setObjectName(u"pushButtonIncomeSheet")
+
+        self.verticalLayout_2.addWidget(self.pushButtonIncomeSheet)
+
+        self.pushButtonBalanceSheet = QPushButton(Form)
+        self.pushButtonBalanceSheet.setObjectName(u"pushButtonBalanceSheet")
+
+        self.verticalLayout_2.addWidget(self.pushButtonBalanceSheet)
+
+        self.pushButtonCashflowSheet = QPushButton(Form)
+        self.pushButtonCashflowSheet.setObjectName(u"pushButtonCashflowSheet")
+
+        self.verticalLayout_2.addWidget(self.pushButtonCashflowSheet)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_2.addItem(self.verticalSpacer)
@@ -155,5 +170,8 @@ class Ui_Form(object):
         self.pushButtonPBCurve.setText(QCoreApplication.translate("Form", u"PB curve", None))
         self.pushButtonTurnoverRate.setText(QCoreApplication.translate("Form", u"Turnover Rate", None))
         self.pushButtonDividend.setText(QCoreApplication.translate("Form", u"dividend", None))
+        self.pushButtonIncomeSheet.setText(QCoreApplication.translate("Form", u"income sheet", None))
+        self.pushButtonBalanceSheet.setText(QCoreApplication.translate("Form", u"balance sheet", None))
+        self.pushButtonCashflowSheet.setText(QCoreApplication.translate("Form", u"cashflow sheet", None))
     # retranslateUi
 
