@@ -141,6 +141,11 @@ class Ui_Form(object):
 
         self.verticalLayout_2.addWidget(self.pushButtonCashflowSheet)
 
+        self.pushButtonSetPrice = QPushButton(Form)
+        self.pushButtonSetPrice.setObjectName(u"pushButtonSetPrice")
+
+        self.verticalLayout_2.addWidget(self.pushButtonSetPrice)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_2.addItem(self.verticalSpacer)
@@ -173,5 +178,6 @@ class Ui_Form(object):
         self.pushButtonIncomeSheet.setText(QCoreApplication.translate("Form", u"income sheet", None))
         self.pushButtonBalanceSheet.setText(QCoreApplication.translate("Form", u"balance sheet", None))
         self.pushButtonCashflowSheet.setText(QCoreApplication.translate("Form", u"cashflow sheet", None))
+        self.pushButtonSetPrice.setText(QCoreApplication.translate("Form", u"set price", None))
     # retranslateUi
 

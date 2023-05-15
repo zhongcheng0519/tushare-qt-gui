@@ -6,6 +6,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 from api.TuShare import TuShare
 from GUI.basic.BasicPage import *
+from GUI.basic.SetPriceDialogImp import SetPriceDialogImp
 
 
 class BasicPageImp(QFrame):
@@ -35,6 +36,7 @@ class BasicPageImp(QFrame):
         self.ui.pushButtonIncomeSheet.clicked.connect(self.onPushButtonIncomeSheetClicked)
         self.ui.pushButtonBalanceSheet.clicked.connect(self.onPushButtonBalanceSheetClicked)
         self.ui.pushButtonCashflowSheet.clicked.connect(self.onPushButtonCashflowSheetClicked)
+        self.ui.pushButtonSetPrice.clicked.connect(self.onPushButtonSetPriceClicked)
 
     def refresh(self):
         print("refresh")
@@ -164,6 +166,7 @@ class BasicPageImp(QFrame):
         df = self.tushare.get_pe_curve(code, start, end)
 
         # 绘制市盈率曲线到graphicsView
+        self.show_pe_curve(df, True)
         self.show_pe_curve(df)
 
     def onPushButtonPBCurveClicked(self):
@@ -237,3 +240,12 @@ class BasicPageImp(QFrame):
         df = self.tushare.get_cashflow_sheet(code, start_date, end_date)
         # df用Markdown格式输出
         self.ui.textEdit.setText(df.to_markdown())
+
+    def onPushButtonSetPriceClicked(self):
+        print("onPushButtonSetPriceClicked")
+        code = self.current_stock_code
+        if code is None:
+            QMessageBox.warning(self, "警告", "请选择股票")
+            return
+        dialog = SetPriceDialogImp(code)
+        dialog.exec_()
