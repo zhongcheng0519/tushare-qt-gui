@@ -22,11 +22,12 @@ class Ui_Form(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.treeWidget = QTreeWidget(Form)
         self.treeWidget.setObjectName(u"treeWidget")
-        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.treeWidget.sizePolicy().hasHeightForWidth())
         self.treeWidget.setSizePolicy(sizePolicy)
+        self.treeWidget.setMinimumSize(QSize(500, 0))
 
         self.horizontalLayout_2.addWidget(self.treeWidget)
 
@@ -162,6 +163,9 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         ___qtreewidgetitem = self.treeWidget.headerItem()
+        ___qtreewidgetitem.setText(4, QCoreApplication.translate("Form", u"\u8d2d\u5165\u4ef7\u683c", None));
+        ___qtreewidgetitem.setText(3, QCoreApplication.translate("Form", u"\u5f53\u524dPE", None));
+        ___qtreewidgetitem.setText(2, QCoreApplication.translate("Form", u"\u5f53\u524d\u4ef7\u683c", None));
         ___qtreewidgetitem.setText(1, QCoreApplication.translate("Form", u"\u4ee3\u7801", None));
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("Form", u"\u540d\u79f0", None));
         self.label.setText(QCoreApplication.translate("Form", u"from:", None))

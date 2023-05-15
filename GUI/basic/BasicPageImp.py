@@ -7,6 +7,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from api.TuShare import TuShare
 from GUI.basic.BasicPage import *
 from GUI.basic.SetPriceDialogImp import SetPriceDialogImp
+from utils.MyStockPrice import MyStockPrice
 
 
 class BasicPageImp(QFrame):
@@ -75,6 +76,7 @@ class BasicPageImp(QFrame):
         print("load_my_stock")
         stocks = toml.load("conf/mystock.toml")['stocks']
         # add stocks to self.ui.treeWidget
+        my_stock_price = MyStockPrice()
         for group in stocks.keys():
             print(f"{group=}")
             stock_group = stocks[group]
@@ -86,6 +88,22 @@ class BasicPageImp(QFrame):
                 child.setText(0, stock)
                 stock_code = self.tushare.get_stock_code_by_name(stock)
                 child.setText(1, stock_code)
+                # 当前价格，当前PE，购入价格
+                close_price_and_pe = self.tushare.get_close_price(stock_code)
+                close_price = close_price_and_pe['close_price']
+                child.setText(2, str(close_price))
+                pe_ttm = close_price_and_pe['pe_ttm']
+                pe_ttm_str = str(pe_ttm)
+                stock_price = my_stock_price.get_data_by_stock_code(stock_code)
+                if stock_price is not None:
+                    low_pe_thresh = stock_price['low_pe_thresh']
+                    high_pe_thresh = stock_price['high_pe_thresh']
+                    if pe_ttm < low_pe_thresh:
+                        pe_ttm_str += " ↓"
+                    elif pe_ttm > high_pe_thresh:
+                        pe_ttm_str += " ↑"
+                    child.setText(4, str(stock_price['bought_price']))
+                child.setText(3, pe_ttm_str)
 
         self.ui.treeWidget.expandAll()
 

@@ -1,6 +1,7 @@
 import tushare as ts
 import pandas as pd
 import toml
+from datetime import datetime
 
 
 class TuShare:
@@ -48,3 +49,19 @@ class TuShare:
     def get_cashflow_sheet(self, code: str, start: str, end: str) -> pd.DataFrame:
         df = self.pro.cashflow(ts_code=code, start_date=start, end_date=end, fields='ts_code,end_date,net_profit,c_paid_for_taxes')
         return df
+
+    def get_close_price(self, code: str) -> float:
+        today = datetime.today().strftime('%Y%m%d')
+        yesterday = (datetime.today() - pd.Timedelta(days=1)).strftime('%Y%m%d')
+        now = datetime.now()
+        if now.hour < 15:
+            trade_date = yesterday
+        else:
+            trade_date = today
+        df_daily = self.pro.daily(ts_code=code, trade_date=trade_date, fields='ts_code,trade_date,close')
+        df_daily_basic = self.pro.daily_basic(ts_code=code, trade_date=trade_date, fields='ts_code,trade_date,pe_ttm')
+        res = {
+            "close_price": df_daily['close'][0],
+            "pe_ttm": df_daily_basic['pe_ttm'][0]
+        }
+        return res

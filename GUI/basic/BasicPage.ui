@@ -17,10 +17,16 @@
    <item>
     <widget class="QTreeWidget" name="treeWidget">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+      <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>500</width>
+       <height>0</height>
+      </size>
      </property>
      <column>
       <property name="text">
@@ -30,6 +36,21 @@
      <column>
       <property name="text">
        <string>代码</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>当前价格</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>当前PE</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>购入价格</string>
       </property>
      </column>
     </widget>
